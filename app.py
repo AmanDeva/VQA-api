@@ -12,8 +12,10 @@ import io
 
 app = FastAPI()
 
-# --- Hugging Face Login with Token ---
-hf_token = "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"
+# --- Hugging Face Login with Token (from environment variable) ---
+hf_token = os.getenv("HUGGINGFACE_HUB_TOKEN")
+if not hf_token:
+    raise RuntimeError("Hugging Face token not set. Please export HUGGINGFACE_HUB_TOKEN before running.")
 login(token=hf_token)
 
 # --- Load processor from the Hugging Face Hub ---
